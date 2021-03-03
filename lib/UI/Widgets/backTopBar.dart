@@ -10,7 +10,7 @@ class BackTopBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white
       ),
-      padding: EdgeInsets.fromLTRB(wt * 0.02, ht * 0.04, wt * 0.02, 0),
+      padding: EdgeInsets.fromLTRB(wt * 0.02, ht * 0.01, wt * 0.02, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,7 +23,7 @@ class BackTopBar extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: Colors.white,
+                color: Colors.black87,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -45,13 +45,10 @@ class BackTopBar extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.home,
-                color: Colors.white,
+                color: Colors.black87,
               ),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => HomeScreen(
-                        
-                      )));
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),ModalRoute.withName('/home'));
               },
             ),
           )

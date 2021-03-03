@@ -1,16 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:mujinsight/UI/FacultyInfo/Schoolwise/schoolList.dart';
 import 'package:mujinsight/UI/FacultyInfo/Widgets/barGraph.dart';
+import 'package:mujinsight/UI/FacultyInfo/departmentWise.dart';
+import 'package:mujinsight/UI/FacultyInfo/schololWise.dart';
+import 'package:mujinsight/UI/StudentInfo/studentSWinfo.dart';
+import 'package:mujinsight/UI/Widgets/backTopBar.dart';
+import 'package:mujinsight/UI/Widgets/totalAnim.dart';
+import 'package:mujinsight/UI/FacultyInfo/yearInfo.dart';
+import 'package:mujinsight/UI/FacultyInfo/yearwise.dart';
+import 'package:mujinsight/UI/Widgets/cardAnim.dart';
 
-class YearWise extends StatefulWidget {
+class StudentFWinfo extends StatefulWidget {
+
   @override
-  _YearWiseState createState() => _YearWiseState();
+  _StudentFWinfoState createState() => _StudentFWinfoState();
 }
 
-class _YearWiseState extends State<YearWise>
+class _StudentFWinfoState extends State<StudentFWinfo> {
+  @override
+  Widget build(BuildContext context) {
+    double ht = MediaQuery.of(context).size.height;
+    double wt = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.white, Colors.grey[100]],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.2, 0.4])),
+            height: ht,
+            child: Column(
+              children: [
+                BackTopBar(),
+                SingleChildScrollView(
+                  child: StudentFW()
+                 
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange,
+        child: Icon(Icons.camera_alt, color: Colors.white,),
+        onPressed: (){},
+      ),
+    );
+  }
+}
+
+
+
+class StudentFW extends StatefulWidget {
+  @override
+  _StudentFWState createState() => _StudentFWState();
+}
+
+class _StudentFWState extends State<StudentFW>
     with TickerProviderStateMixin {
   List<String> faculties = [
-    'Faculty of Science',
     'Faculty of Engineering',
+    'Faculty of Science',
     'Faculty of Arts & Law',
     'Faculty of Design',
     'Faculty of Management & Commerce',
@@ -39,53 +94,70 @@ class _YearWiseState extends State<YearWise>
   Widget build(BuildContext context) {
     double ht = MediaQuery.of(context).size.height;
     double wt = MediaQuery.of(context).size.width;
-    return Container(
-        padding: EdgeInsets.only(
-          top: ht * 0.03,
-          left: wt * 0.02,
-          right: wt * 0.02,
-        ),
-        height: ht * 0.75,
-        width: wt,
-        child: ListView.builder(
-          itemCount: faculties.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: AnimatedItem(
-                startDelayFraction: 0.00,
-                controller: controllerCard,
-                child: AnimCategoryContainer(CategoryBean(
-                    title: '${index+1} Year',
-                    categoryItems: [
-                      CategoryBean(
-                          quantity: 5,
-                          title: 'Assistant Professor',
-                          isGraph: true),
-                      CategoryBean(
-                          quantity: 10,
-                          title: 'Associatet Professor',
-                          isGraph: true),
-                      CategoryBean(
-                          quantity: 2, title: 'Professor',
-                          isGraph: true),
-                      // CategoryBean(widgget: Container(
-                        
-                      //   alignment: Alignment.centerRight,
-                      //   child: FlatButton(
-                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      //     color: Colors.orange,
-                      //     onPressed: ()=>print('press'),
-                      //     child: Text('View Year Wise', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),))), isGraph: false),
-                    ],
-                    onTap: () {}
-                    )),
+    return SingleChildScrollView(
+          child: Container(
+          padding: EdgeInsets.only(
+            top: ht * 0.03,
+            left: wt * 0.02,
+            right: wt * 0.02,
+          ),
+          height: ht * 0.9,
+          width: wt,
+          child: ListView(
+            children: [
+              TotalAnim(title: 'Students', totalValue: 7000.0,),
+              
+              Container(
+                padding: EdgeInsets.only(top:20),
+                height: ht * 0.75,
+                child: ListView.builder(
+                  itemCount: faculties.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: AnimatedItem(
+                        startDelayFraction: 0.00,
+                        controller: controllerCard,
+                        child: AnimCategoryContainer(CategoryBean(
+                            title: faculties[index],
+                            categoryItems: [
+                              CategoryBean(
+                                  quantity: 50,
+                                  title: 'Admission',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 100,
+                                  title: 'Registered',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 20, title: 'Withdrawl',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 200, title: 'Alumni',
+                                  isGraph: true),
+                              CategoryBean(widgget: Container(
+                                
+                                alignment: Alignment.centerRight,
+                                child: FlatButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  color: Colors.orange,
+                                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => StudentSWinfo())),
+                                  child: Text('View School Wise', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),))), isGraph: false),
+                            ],
+                            onTap: () {}
+                            )),
+                      ),
+                    );
+                  },
+                ),
               ),
-            );
-          },
-        ));
+            ],
+          )),
+    );
   }
 }
+
+
 
 class AnimatedItem extends StatelessWidget {
   AnimatedItem(
@@ -187,13 +259,18 @@ class _AnimCategoryContainerState extends State<AnimCategoryContainer>
                         //   child: Text('School Name'),
                         // ),
                         // SizedBox(width: 8,),
-                        Text(
-                          widget.categoryBean.title,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black87,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600),
+                        Container(
+                          width:MediaQuery.of(context).size.width*0.6,
+                          child: Text(
+                            widget.categoryBean.title,
+                            // overflow: TextOverflow.clip,
+                            maxLines: 3,
+                            style: TextStyle(
+                                
+                                color: Colors.black87,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
 
                         IconButton(
@@ -290,3 +367,5 @@ class CategoryBean {
       this.onTap,
       this.isGraph});
 }
+
+

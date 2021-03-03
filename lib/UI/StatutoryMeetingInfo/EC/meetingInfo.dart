@@ -8,12 +8,12 @@ import 'package:mujinsight/UI/FacultyInfo/schololWise.dart';
 import 'package:mujinsight/UI/Widgets/backTopBar.dart';
 import 'package:mujinsight/UI/Widgets/topBar.dart';
 
-class FacultyInfo extends StatefulWidget {
+class SMeetingInfo extends StatefulWidget {
   @override
-  _FacultyInfoState createState() => _FacultyInfoState();
+  _SMeetingInfoState createState() => _SMeetingInfoState();
 }
 
-class _FacultyInfoState extends State<FacultyInfo> {
+class _SMeetingInfoState extends State<SMeetingInfo> {
   int currTab = 0;
   Widget currScreen = FacultyWise();
   @override
@@ -36,7 +36,7 @@ class _FacultyInfoState extends State<FacultyInfo> {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    TotalFaculties(), currScreen
+                     currScreen
                   ],
                 ),
               ) 
@@ -62,13 +62,18 @@ class _FacultyInfoState extends State<FacultyInfo> {
                         borderRadius:
                             BorderRadius.only(bottomLeft: Radius.circular(10))),
                     color: currTab == 0 ? Colors.orange : Colors.white,
-                    child: Text('Faculty',
-                        style: TextStyle(
-                            color: currTab == 0 ? Colors.white : Colors.black,
-                            fontSize: ht * 0.018,
-                            letterSpacing: 1,
-                            wordSpacing: 2,
-                            fontWeight: FontWeight.w600)),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical:5),
+                      child: Text('Board of Management',
+                      maxLines: 2,
+                      textAlign: TextAlign.end,
+                          style: TextStyle(
+                              color: currTab == 0 ? Colors.white : Colors.black,
+                              fontSize: 13,
+                              letterSpacing: 1,
+                              wordSpacing: 2,
+                              fontWeight: FontWeight.w600)),
+                    ),
                     onPressed: () {
                       setState(() {
                         currTab = 0;
@@ -79,13 +84,18 @@ class _FacultyInfoState extends State<FacultyInfo> {
               Expanded(
                 child: FlatButton(
                     color: currTab == 1 ? Colors.orange : Colors.white,
-                    child: Text('Schools',
-                    style: TextStyle(
-                            color: currTab == 1 ? Colors.white : Colors.black,
-                            fontSize: ht * 0.018,
-                            letterSpacing: 1,
-                            wordSpacing: 2,
-                            fontWeight: FontWeight.w600)),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical:5),
+                      child: Text('Executive Council',
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                              color: currTab == 1 ? Colors.white : Colors.black,
+                              fontSize: 13,
+                              letterSpacing: 1,
+                              wordSpacing: 2,
+                              fontWeight: FontWeight.w600)),
+                    ),
                     onPressed: () {
                       setState(() {
                         currTab = 1;
@@ -99,13 +109,18 @@ class _FacultyInfoState extends State<FacultyInfo> {
                     shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.only(bottomRight: Radius.circular(15))),
-                    child: Text('Department',
-                    style: TextStyle(
-                            color: currTab == 2 ? Colors.white : Colors.black,
-                            fontSize: ht * 0.018,
-                            letterSpacing: 1,
-                            wordSpacing: 2,
-                            fontWeight: FontWeight.w600)),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical:5),
+                      child: Text('Academic Council',
+                      maxLines: 2,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                              color: currTab == 2 ? Colors.white : Colors.black,
+                              fontSize: 13,
+                              letterSpacing: 1,
+                              wordSpacing: 2,
+                              fontWeight: FontWeight.w600)),
+                    ),
                     onPressed: () {
                       setState(() {
                         currTab = 2;
@@ -121,68 +136,6 @@ class _FacultyInfoState extends State<FacultyInfo> {
       // floatingActionButton: FloatingActionButton.extended(
       //   backgroundColor: Colors.orange,
       //   onPressed: (){}, label: Text('Info-Graphics', style:TextStyle(color: Colors.black87, fontWeight: FontWeight.w600, letterSpacing: 2)))
-    );
-  }
-
-  Widget facultyGrid(double ht, double wt) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: ht * 0.03,
-        left: wt * 0.02,
-        right: wt * 0.02,
-      ),
-      height: ht * 0.82,
-      width: wt,
-      child: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(5),
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: <Widget>[
-          FacultyCard(
-            name: 'Science',
-            program: 12,
-            school: 1,
-            departments: 5,
-            faculties: 65,
-          ),
-          FacultyCard(
-            name: 'Engineering',
-            program: 12,
-            school: 4,
-            departments: 10,
-            faculties: 40,
-          ),
-          FacultyCard(
-            name: 'Arts and Law',
-            program: 12,
-            school: 3,
-            departments: 3,
-            faculties: 40,
-          ),
-          FacultyCard(
-            name: 'Design',
-            program: 12,
-            school: 2,
-            departments: 2,
-            faculties: 40,
-          ),
-          GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => SchoolPage(
-                        sNum: 3,
-                        name: 'Management & Commerce',
-                      ))),
-              child: FacultyCard(
-                name: 'Management & Commerce',
-                program: 8,
-                school: 3,
-                departments: 3,
-                faculties: 46,
-              )),
-        ],
-      ),
     );
   }
 }

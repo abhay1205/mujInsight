@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mujinsight/UI/Auth/loginscreen.dart';
+import 'package:mujinsight/UI/Drawer/profile.dart';
+import 'package:mujinsight/UI/Drawer/searchFaculty.dart';
+import 'package:mujinsight/UI/EditSection/hod.dart';
+import 'package:mujinsight/UI/Home/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HDrawer extends StatefulWidget {
   @override
@@ -27,7 +33,7 @@ class _HDrawerState extends State<HDrawer> {
                 end: Alignment.topCenter,
                 stops: [0.2, 0.3])),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -50,107 +56,169 @@ class _HDrawerState extends State<HDrawer> {
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
+                top: 20,
+                bottom: 20
               ),
               child: InkWell(
-                child: Text('Faculty Info'),
-                onTap: () {},
+                child: Text('Profile',maxLines: 2, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()));
+                },
               ),
             ),
             _divider(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
+                top: 20,
+                bottom: 20
               ),
               child: InkWell(
-                child: Text('Student Info'),
-                onTap: () {},
+                child: Text('HoD Edit Section', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                onTap: () {
+                  print('presssed');
+                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => HodSection()));
+                },
               ),
             ),
             _divider(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
+                top: 20,
+                bottom: 20
               ),
               child: InkWell(
-                child: Text('Placement Info'),
-                onTap: () {},
+                child: Text('Search',maxLines: 2, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SearchFaculty()));},
               ),
             ),
             _divider(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
+                top: 20,
+                bottom: 20
               ),
               child: InkWell(
-                child: Text('Research Info'),
+                child: Text('Contact',maxLines: 2, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
                 onTap: () {},
               ),
             ),
             _divider(),
-            Padding(
+             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
+                top: 20,
+                bottom: 20
               ),
               child: InkWell(
-                child: Text('Awards & Recognition Info'),
-                onTap: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10,
-              ),
-              child: InkWell(
-                child: Text('Functional Units Info'),
-                onTap: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10,
-              ),
-              child: InkWell(
-                child: Text('Program Info'),
-                onTap: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                thickness: 2,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10,
-              ),
-              child: InkWell(
-                child: Text('Statutory Meeting Info'),
+                child: Text('Rate Us',maxLines: 2, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
                 onTap: () {},
               ),
             ),
             _divider(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Image(
-                width: wt * 0.5,
-                height: ht * 0.075,
-                image: AssetImage('asset/mujbanner.png'),
-                fit: BoxFit.fill,
+             Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 20,
+                bottom: 20
               ),
-            )
+              child: InkWell(
+                child: Text('Log Out',maxLines: 2, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600 ),),
+                onTap: () async{
+                  final _prefs = await SharedPreferences.getInstance();
+                  _prefs.clear().then((value) => Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen())));
+                },
+              ),
+            ),
+            
+            
+            _divider(),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Placement Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // _divider(),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Research Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // _divider(),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Awards & Recognition Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10),
+            //   child: Divider(
+            //     thickness: 2,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Functional Units Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10),
+            //   child: Divider(
+            //     thickness: 2,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Program Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10),
+            //   child: Divider(
+            //     thickness: 2,
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10,
+            //   ),
+            //   child: InkWell(
+            //     child: Text('Statutory Meeting Info'),
+            //     onTap: () {},
+            //   ),
+            // ),
+            // _divider(),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 10),
+            //   child: Image(
+            //     width: wt * 0.5,
+            //     height: ht * 0.075,
+            //     image: AssetImage('asset/mujbanner.png'),
+            //     fit: BoxFit.fill,
+            //   ),
+            // )
           ],
         ),
       ),

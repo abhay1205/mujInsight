@@ -1,16 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:mujinsight/UI/FacultyInfo/Widgets/barGraph.dart';
+import 'package:mujinsight/UI/PlacementInfo/placementSWinfo.dart';
+import 'package:mujinsight/UI/StudentInfo/studentSWinfo.dart';
+import 'package:mujinsight/UI/Widgets/backTopBar.dart';
+import 'package:mujinsight/UI/Widgets/totalAnim.dart';
 
-class YearWise extends StatefulWidget {
+
+class PlacementFWinfo extends StatefulWidget {
+
   @override
-  _YearWiseState createState() => _YearWiseState();
+  _PlacementFWinfoState createState() => _PlacementFWinfoState();
 }
 
-class _YearWiseState extends State<YearWise>
+class _PlacementFWinfoState extends State<PlacementFWinfo> {
+  @override
+  Widget build(BuildContext context) {
+    double ht = MediaQuery.of(context).size.height;
+    double wt = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.white, Colors.grey[100]],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.2, 0.4])),
+            height: ht,
+            child: Column(
+              children: [
+                BackTopBar(),
+                SingleChildScrollView(
+                  child: PlacementFW()
+                 
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class PlacementFW extends StatefulWidget {
+  @override
+  _PlacementFWState createState() => _PlacementFWState();
+}
+
+class _PlacementFWState extends State<PlacementFW>
     with TickerProviderStateMixin {
   List<String> faculties = [
-    'Faculty of Science',
     'Faculty of Engineering',
+    'Faculty of Science',
     'Faculty of Arts & Law',
     'Faculty of Design',
     'Faculty of Management & Commerce',
@@ -39,53 +84,76 @@ class _YearWiseState extends State<YearWise>
   Widget build(BuildContext context) {
     double ht = MediaQuery.of(context).size.height;
     double wt = MediaQuery.of(context).size.width;
-    return Container(
-        padding: EdgeInsets.only(
-          top: ht * 0.03,
-          left: wt * 0.02,
-          right: wt * 0.02,
-        ),
-        height: ht * 0.75,
-        width: wt,
-        child: ListView.builder(
-          itemCount: faculties.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: AnimatedItem(
-                startDelayFraction: 0.00,
-                controller: controllerCard,
-                child: AnimCategoryContainer(CategoryBean(
-                    title: '${index+1} Year',
-                    categoryItems: [
-                      CategoryBean(
-                          quantity: 5,
-                          title: 'Assistant Professor',
-                          isGraph: true),
-                      CategoryBean(
-                          quantity: 10,
-                          title: 'Associatet Professor',
-                          isGraph: true),
-                      CategoryBean(
-                          quantity: 2, title: 'Professor',
-                          isGraph: true),
-                      // CategoryBean(widgget: Container(
-                        
-                      //   alignment: Alignment.centerRight,
-                      //   child: FlatButton(
-                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      //     color: Colors.orange,
-                      //     onPressed: ()=>print('press'),
-                      //     child: Text('View Year Wise', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),))), isGraph: false),
-                    ],
-                    onTap: () {}
-                    )),
+    return SingleChildScrollView(
+          child: Container(
+          padding: EdgeInsets.only(
+            top: ht * 0.03,
+            left: wt * 0.02,
+            right: wt * 0.02,
+          ),
+          height: ht * 0.9,
+          width: wt,
+          child: ListView(
+            children: [
+              TotalAnim(title: 'Placement', totalValue: 1200.0,),
+              
+              Container(
+                padding: EdgeInsets.only(top:20),
+                height: ht * 0.75,
+                child: ListView.builder(
+                  itemCount: faculties.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: AnimatedItem(
+                        startDelayFraction: 0.00,
+                        controller: controllerCard,
+                        child: AnimCategoryContainer(CategoryBean(
+                            title: faculties[index],
+                            categoryItems: [
+                              CategoryBean(
+                                  quantity: 120,
+                                  title: 'Total Placement',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 85,
+                                  title: '% Placed',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 36, title: 'Companies Visited',
+                                  isGraph: true),
+                              CategoryBean(
+                                  quantity: 42, title: 'LPA Highest Package',
+                                  isGraph: true),
+                                  CategoryBean(
+                                  quantity: 6, title: 'LPA Avg Package',
+                                  isGraph: true),
+                                  CategoryBean(
+                                  quantity: 3.5, title: 'LPA Lowest Package',
+                                  isGraph: true),
+                              CategoryBean(widgget: Container(
+                                
+                                alignment: Alignment.centerRight,
+                                child: FlatButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  color: Colors.orange,
+                                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PlacementSWinfo())),
+                                  child: Text('View School Wise', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),))), isGraph: false),
+                            ],
+                            onTap: () {}
+                            )),
+                      ),
+                    );
+                  },
+                ),
               ),
-            );
-          },
-        ));
+            ],
+          )),
+    );
   }
 }
+
+
 
 class AnimatedItem extends StatelessWidget {
   AnimatedItem(
@@ -187,13 +255,18 @@ class _AnimCategoryContainerState extends State<AnimCategoryContainer>
                         //   child: Text('School Name'),
                         // ),
                         // SizedBox(width: 8,),
-                        Text(
-                          widget.categoryBean.title,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black87,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w600),
+                        Container(
+                          width:MediaQuery.of(context).size.width*0.6,
+                          child: Text(
+                            widget.categoryBean.title,
+                            // overflow: TextOverflow.clip,
+                            maxLines: 3,
+                            style: TextStyle(
+                                
+                                color: Colors.black87,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
 
                         IconButton(
@@ -290,3 +363,5 @@ class CategoryBean {
       this.onTap,
       this.isGraph});
 }
+
+

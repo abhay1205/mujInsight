@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TotalFaculties extends StatefulWidget {
+class TotalAnim extends StatefulWidget {
+  String title;
+  double totalValue;
+
+  TotalAnim({this.title, this.totalValue});
+
   @override
-  _TotalFacultiesState createState() => _TotalFacultiesState();
+  _TotalAnimState createState() => _TotalAnimState();
 }
 
-class _TotalFacultiesState extends State<TotalFaculties>
+class _TotalAnimState extends State<TotalAnim>
     with SingleTickerProviderStateMixin {
   AnimationController controllerTF;
 
@@ -16,7 +21,7 @@ class _TotalFacultiesState extends State<TotalFaculties>
 
     controllerTF = AnimationController(
         lowerBound: 0,
-        upperBound: 480,
+        upperBound: widget.totalValue,
         duration: Duration(seconds: 2),
         vsync: this);
     controllerTF.forward();
@@ -40,10 +45,10 @@ class _TotalFacultiesState extends State<TotalFaculties>
           text: TextSpan(children: [
             TextSpan(
                 text:
-                    "Faculties ${controllerTF.value.toStringAsFixed(0)}+",
+                    "${widget.title} ${controllerTF.value.toStringAsFixed(0)}+",
                 style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: ht * 0.04,
+                    fontSize: 20,
                     letterSpacing: 1,
                     wordSpacing: 2,
                     color: Colors.black87,
